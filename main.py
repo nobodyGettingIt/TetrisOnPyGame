@@ -9,6 +9,7 @@ from random import randint
 black = (0,0,0)
 
 numOfShapes = ['I', 'O', 'J', 'L', 'S', 'T', 'Z']
+width, height = 400, 400
 
 class Game:
     def __init__(self, h, w):
@@ -23,16 +24,17 @@ class Game:
         self.updatePeriod = 0.15
 
         self.field = Field(h//10, w//10, self.screen)
-        self.shape = Shape(self.field, numOfShapes[randint(0, 6)])
-        
+        self.shape = self.createShape()        
     
+    def createShape(self):
+        return Shape(self.field, numOfShapes[randint(0, 6)], (self.h, self.w))
+
     def update(self, dt):
         self.field.update()
         
         
         if not self.shape.fall():
-            self.shape = Shape(self.field, numOfShapes[randint(0, 6)])
-            
+            self.shape = self.createShape()           
 
     
     def render(self):
@@ -74,7 +76,7 @@ class Game:
 def main():
     pg.init()
     
-    g = Game(200, 400)
+    g = Game(height, width)
     g.mainLoop()
     
     pg.quit()

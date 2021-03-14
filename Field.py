@@ -1,13 +1,13 @@
 import pygame as pg
 
 shapes = {
-    'I': ((1,-2), (1,-1), (1,-3), (1,-4)),
-    'O': ((1,-2), (1,-1), (2,-2), (2,-1)),
-    'J': ((2,-2), (2,-3), (2,-1), (1,-1)),
-    'L': ((2,-2), (2,-1), (2,-3), (3,-1)),
-    'S': ((2,-2), (2,-1), (1,-1), (3,-2)),
-    'T': ((2,-1), (1,-1), (2,-2), (3,-1)),
-    'Z': ((2,-1), (1,-2), (2,-2), (3,-1))
+    'I': ((0,-2), (0,-1), (0,-3), (0,-4)),
+    'O': ((0,-2), (0,-1), (1,-2), (1,-1)),
+    'J': ((1,-2), (1,-3), (1,-1), (0,-1)),
+    'L': ((1,-2), (1,-1), (1,-3), (2,-1)),
+    'S': ((1,-2), (1,-1), (0,-1), (2,-2)),
+    'T': ((1,-1), (1,-1), (1,-2), (2,-1)),
+    'Z': ((1,-1), (0,-2), (1,-2), (2,-1))
 }
 
 
@@ -166,14 +166,15 @@ class Block:
             
 
 class Shape:
-    def __init__(self, field, typeOfShape):
+    def __init__(self, field, typeOfShape, windowSize):
         coords = shapes[typeOfShape]
+        h, w = windowSize[0], windowSize[1]
         
         self.blocks = [
-                    Block(coords[0][0], coords[0][1], field),
-                    Block(coords[1][0], coords[1][1], field),
-                    Block(coords[2][0], coords[2][1], field),
-                    Block(coords[3][0], coords[3][1], field)
+                    Block(w//20 + coords[0][0], coords[0][1], field),
+                    Block(w//20 + coords[1][0], coords[1][1], field),
+                    Block(w//20 + coords[2][0], coords[2][1], field),
+                    Block(w//20 + coords[3][0], coords[3][1], field)
                 ]
         self.type = typeOfShape
         
